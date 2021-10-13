@@ -14,57 +14,32 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+# React axios, then 을 이용하여 api Get 사용해보기
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## import 할때
+import 할때 * 을 사용 안하는게 좋다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+파일 하나에 많은 기능을 가져오면 일단 체크(의심)을 해봐야한다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## useState 초기값 지정 할때
 
-### `yarn eject`
+data를 선언해줄때 적합한 초기값을 꼭 선언해 줘야한다. null 이런거 쓰면 안됌
+ex) const [user, setUsers] = useState([]); 초기값이 배열로 되어있냐 객체로 되어있냐에 따라 초기값 지정이 달라진다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+useState 초기값에 []을 넣어준 이유 (Network창 or console창에서 데이터가 들어오는 타입(배열 or 객체)을 보고 초기값을 넣어줘야 한다.)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+처음엔 인터넷에 나온대로 null 값을 넣어주었다, 하지만 데이터는 나오지 않았다
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+책임님의 설명을 듣고난후 console창에서 데이터가 들어오는 구조를 보았더니 배열안에 객체로 들어온것을 확인.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+그러므로 초기값은 빈배열로 지정해주어야 한다는 걸 알았다.
 
-## Learn More
+## axios 사용시
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+then => 실행할 함수를 인자로 받는다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+async 같은 경우 비동기 처리 방식으로 다른 코드에 영향을 받지 않고 data가 들어오면 그때 동작하는 방식이다.
+async는 보통 사용자가 어떤 행동을 취하고 있을때 계속 데이터가 돌아가야 하는 상황일때 많이 쓰인다.
+예) 다운로드 등..

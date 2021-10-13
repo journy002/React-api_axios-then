@@ -1,8 +1,7 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Api, { getUsers } from './api/Api';
-import TestApi, { getDatas } from './testApi/testApi';
+import React, { useState, useEffect, useRef } from 'react';
+import { getDatas } from './testApi/testApi';
+import UserList from './userList/userList';
 
 // import 할때 * 을 사용 안하는게 좋다.
 // 파일 하나에 많은 기능을 가져오면 일단 체크(의심)을 해봐야한다.
@@ -18,16 +17,58 @@ function App() {
   //     setUsers(response.data)
   //   })
   // },[]);
-
   
   const [datas, setDatas] = useState([]);
+
+  const [inputs, setinputs] = useState({
+    username: '',
+    email: ''
+  });
+
+  const { username, email } = inputs;
+  const nextId = useRef(1);
+  const [users, setUsers] = useState([
+        {
+          username:'',
+          email:''
+        }
+      ]
+    );
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+
+    setinputs({
+      ...inputs,
+      [name]: value
+    });
+  }
+
+  
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email
+    }
+
+    setUsers([...users, user])
+
+    setinputs({
+      username: '',
+      email:''
+    });
+
+    console.log(user)
+    nextId.current += 1;
+  }
+
   useEffect(() => {
     getDatas().then((response) => {
       console.log(response.data,'TestApi');
         setDatas(response.data)
     })
   },[])
-  
   
   return (
     // <div>
@@ -38,7 +79,18 @@ function App() {
     //   ))}
     // </div>
     <>
+      <UserList
+        username={username}
+        useremail={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
       <div>
+        {users.map(user => (
+          <li key={user.id}>
+            {user.username} ({user.email})
+          </li>
+        ))}
         {datas.map(data => (
           <li key={data.id}>
             {data.name} ({data.username})
