@@ -31,7 +31,7 @@ export function TestApi() {
 
     return (
         <div>
-            {datas.map(data => {
+            {datas.map((data) => {
                 <li key={data.id}>
                     {data.username} ({data.name})
                 </li>

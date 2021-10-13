@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getDatas } from './testApi/testApi';
 import CreateUser from './CreateUser/CreateUser';
 import UserList from './UserList/UserList';
+import Header from './header/header';
 
 // import 할때 * 을 사용 안하는게 좋다.
 // 파일 하나에 많은 기능을 가져오면 일단 체크(의심)을 해봐야한다.
@@ -76,6 +77,7 @@ function App() {
     //   ))}
     // </div>
     <>
+      <Header />
       <CreateUser
         username={username}
         useremail={email}
