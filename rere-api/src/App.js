@@ -28,13 +28,7 @@ function App() {
 
   const { username, email } = inputs;
   const nextId = useRef(1);
-  const [users, setUsers] = useState([
-        {
-          username: '',
-          email: ''
-        }
-      ]
-  )
+  const [users, setUsers] = useState([]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -61,7 +55,7 @@ function App() {
     });
 
     // console을 찍어 유저 데이터가 잘 들어오는지 확인
-    console.log(user)
+    console.log(user,'create user')
     nextId.current += 1;
   };
 
@@ -99,10 +93,10 @@ function App() {
           <li key={data.id}>
             {data.name} ({data.username})
           </li>
-        ))};
+        ))}
       </div>
     </>
-  );
+  )
 }
 
 export default App;
