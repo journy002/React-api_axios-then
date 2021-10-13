@@ -1,14 +1,21 @@
 import React from 'react'
 
-function UserList({ onChange, onCreate, username, useremail }) {
-
-    return (
-        <div>
-            <input name='username' value={username} onChange={onChange} placeholder='name'  />
-            <input name='email' value={useremail} onChange={onChange} placeholder='email'  />
-            <button onClick={() => onCreate()} >Add</button>
-        </div>
+function User ({user}) {
+    return(
+        <li>
+            {user.username} {user.email}
+        </li>
     )
 }
 
+function UserList({users}) {
+
+    return (
+        <div>
+            {users.map(user => (
+                <User user={user} />
+            ))}
+        </div>
+    )
+}
 export default UserList;
